@@ -3,6 +3,7 @@ let computerPlay = () => {
     let randomArr = arr[Math.floor(Math.random() * arr.length)];
     return randomArr;
 }
+
 let computer = 0;
 let human = 0;
 
@@ -12,7 +13,6 @@ function playRound(playerSelection, computerSelection) {
     if (playerSelection == "ROCK" && computerSelection == "SCISSOR") {
         message = "You win Rock Beats Scissor";
         human++;
-
     } else if (playerSelection == "SCISSOR" && computerSelection == "ROCK") {
         message = " You lose Rock Beats Scissor";
         computer++;
@@ -21,6 +21,7 @@ function playRound(playerSelection, computerSelection) {
         human++;
     } else if (playerSelection == "PAPER" && computerSelection == "SCISSOR") {
         message = " You lose Scissor Beats Paper";
+        computer++;
     } else if (playerSelection == "SCISSOR" && computerSelection == "PAPER") {
         message = " You win Scissor Beats Paper";
         human++;
@@ -30,30 +31,52 @@ function playRound(playerSelection, computerSelection) {
     } else {
         message = "Draw"
     }
-    return message;
+    alert(message)
+    if (human == 5) {
+        alert("You Win!")
+    } else if (computer == 5) {
+        alert("Computer Win!")
+    }
 }
 
-let playerSelect = window.prompt("What's your pick?");
-const playerSelection = playerSelect.toUpperCase();
-const computerSelection = computerPlay();
-//console.log(playRound(playerSelection, computerSelection))
+const rockBtn = document.querySelector('#rockBtn')
 
-//console.log(computerSelection);
+rockBtn.addEventListener('click', (e) => {
+    //console.log(e.target.innerHTML)
+    const playerSelection = e.target.innerText.toUpperCase()
+    const computerSelection = computerPlay();
+    playRound(playerSelection, computerSelection)
+    //console.log(human, computer);
+    let humanT = document.getElementById('human');
+    let bot = document.getElementById('bot');
+    humanT.innerText = `${human}`;
+    bot.innerText = `${computer}`;
+})
 
-let game = () => {
-    for (let i = 0; i < 5; i++) {
-        const computerSelection = computerPlay();
-        console.log(playRound(playerSelection, computerSelection));
+const paperBtn = document.querySelector('#paperBtn')
 
-    }
-    console.log(human, computer)
-    if (human > computer) {
-        alert('Yahoo! you Win!')
-    } else if (human < computer) {
-        alert('You Lose!')
-    } else {
-        alert('Draw')
-    }
+paperBtn.addEventListener('click', (e) => {
+    //console.log(e.target.innerHTML)
+    const playerSelection = e.target.innerText.toUpperCase()
+    const computerSelection = computerPlay();
+    playRound(playerSelection, computerSelection)
+    console.log(human, computer);
+    let humanT = document.getElementById('human');
+    let bot = document.getElementById('bot');
+    humanT.innerText = `${human}`;
+    bot.innerText = `${computer}`;
+})
 
-}
-game()
+const scissorBtn = document.querySelector('#scissorBtn')
+
+scissorBtn.addEventListener('click', (e) => {
+    //console.log(e.target.innerHTML)
+    const playerSelection = e.target.innerText.toUpperCase()
+    const computerSelection = computerPlay();
+    playRound(playerSelection, computerSelection)
+    console.log(human, computer);
+    let humanT = document.getElementById('human');
+    let bot = document.getElementById('bot');
+    humanT.innerText = `${human}`;
+    bot.innerText = `${computer}`;
+})
